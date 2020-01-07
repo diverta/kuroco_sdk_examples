@@ -1,0 +1,9 @@
+{
+	"api_token": "TOKEN",
+	"api_host": "https://demo.picol.app",
+	"api_name": "rcms-api",
+	"dummy_server_port": 3000,
+	"dummy_server_client_port": 30000,
+	"doc_port": 9999,
+	"configure_root": "/private/tmp/examples/apiconfig"
+}

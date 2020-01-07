@@ -1,0 +1,2702 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Picol API",
+		"version": "1.0",
+		"description": "Alpha testing of new RCMS API"
+	},
+	"servers": [
+		{
+			"url": "https://demo.picol.app",
+			"description": "API Backend"
+		},
+		{
+			"url": "https://demo-picol.r-cms.jp",
+			"description": "API Backend (RCMS Management domain)"
+		}
+	],
+	"paths": {
+		"/rcms-api/feeds": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"get": {
+				"tags": [
+					"Topics"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **topics_group_id** `1`\n\n> **cnt** `9`\n\n> **tag_cond** `AND`\n\n> **tag_search** `1`\n\n> **get_comment_cnt** `1`\n\n> **get_favorite_cnt** `1`\n\n> **add_my_favorite_flg** `1`\n",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					},
+					{
+						"name": "cnt",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Number of topics per page"
+					},
+					{
+						"name": "pageID",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Page ID"
+					},
+					{
+						"name": "custom_search_id",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "search contdition"
+					},
+					{
+						"name": "topics_keyword",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Keyword"
+					},
+					{
+						"name": "topics_keyword_cond",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Change the way of narrowing down by keyword (Default: AND)"
+					},
+					{
+						"name": "contents_type[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"format": "int64"
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "The ID from the displayed category. All data will be displayed when this is not set."
+					},
+					{
+						"name": "contents_type_cond",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Change the way of narrowing down by category ID (Default: OR)"
+					},
+					{
+						"name": "date",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Date"
+					},
+					{
+						"name": "using_season",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Use season (Yes: 1 | No: 0)"
+					},
+					{
+						"name": "season",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Season"
+					},
+					{
+						"name": "ext_column_cond",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "ext_column condition type (Default:OR)<br> \r\nTo specify an ext_col number set: 'ext_column_{no}_cond'"
+					},
+					{
+						"name": "exclude_topics_id",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "IDs of the excluded topics"
+					},
+					{
+						"name": "tag_category_id",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "ID of the tag category to be displayed. (Default: All)"
+					},
+					{
+						"name": "tag_search",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "narrowed by the value of the tag id.  yes:1 no:0"
+					},
+					{
+						"name": "tag_id[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"format": "int64"
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Tag IDs that you would like to display"
+					},
+					{
+						"name": "tag_cond",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Change the way to narrow down tags (Default: OR)"
+					},
+					{
+						"name": "exclude_tag_id",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Tag IDs that you would like to hide"
+					},
+					{
+						"name": "my_favorite_list",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": ""
+					},
+					{
+						"name": "my_comment_list",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": ""
+					},
+					{
+						"name": "my_own_list",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": ""
+					},
+					{
+						"name": "order",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Set the sort order. Available param {0}"
+					},
+					{
+						"name": "order_by_id",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": ""
+					},
+					{
+						"name": "id[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"format": "int64"
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "IDs of the displayed topics"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Topics data successfully fetched"
+					},
+					"404": {
+						"description": "Topics data could not be found"
+					}
+				}
+			}
+		},
+		"/rcms-api/feed/create": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"post": {
+				"tags": [
+					"Topics"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **topics_group_id** `1`\n",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Topic is inserted"
+					}
+				},
+				"requestBody": {
+					"required": true,
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"subject": {
+										"type": "string",
+										"default": "",
+										"example": "Topics Exemple Title",
+										"description": "Topic title"
+									},
+									"ymd": {
+										"type": "string",
+										"format": "date",
+										"description": "Date"
+									},
+									"open_type": {
+										"type": "string",
+										"enum": [
+											"open",
+											"close",
+											"default"
+										],
+										"default": "open",
+										"example": "open",
+										"description": "Opening to the public and closed-door"
+									},
+									"topics_flg": {
+										"type": "integer",
+										"format": "int64",
+										"enum": [
+											0,
+											1
+										],
+										"default": 1,
+										"example": 1,
+										"description": "Display all topics to logged in members, regardless ther public/hidden status"
+									},
+									"season": {
+										"type": "integer",
+										"format": "int64",
+										"default": 2020,
+										"example": 2020,
+										"description": "Season"
+									},
+									"contents": {
+										"type": "string",
+										"default": "",
+										"example": "",
+										"description": "Contents"
+									},
+									"regular_flg": {
+										"type": "integer",
+										"format": "int64",
+										"default": 0,
+										"example": 0,
+										"description": "display up"
+									},
+									"link_flg": {
+										"type": "integer",
+										"format": "int64",
+										"default": 0,
+										"example": 0,
+										"description": "Display method"
+									},
+									"link_url": {
+										"type": "string",
+										"default": "",
+										"example": "",
+										"description": "Link"
+									},
+									"contents_type": {
+										"type": "integer",
+										"format": "int64",
+										"enum": [
+											1,
+											4
+										],
+										"example": 0,
+										"description": "Category ID\n* 1 => カテゴリー①\n* 4 => カテゴリー②"
+									},
+									"tag_id": {
+										"type": "array",
+										"uniqueItems": true,
+										"items": {
+											"type": "integer",
+											"enum": [
+												75,
+												76,
+												77,
+												78,
+												79,
+												80,
+												81,
+												82,
+												83,
+												84,
+												85,
+												86,
+												87,
+												88,
+												89,
+												90,
+												91,
+												92,
+												93,
+												94,
+												95,
+												96,
+												97,
+												98,
+												99,
+												100,
+												101,
+												102,
+												103,
+												104,
+												105,
+												106,
+												107,
+												108,
+												109,
+												110,
+												111,
+												112,
+												113,
+												114,
+												115,
+												116,
+												117,
+												118,
+												119,
+												120,
+												121,
+												122,
+												123,
+												124,
+												125,
+												126,
+												127,
+												128,
+												129,
+												130,
+												131,
+												132,
+												133,
+												134,
+												135,
+												136,
+												67,
+												68,
+												69,
+												70,
+												71,
+												72,
+												73,
+												74
+											]
+										},
+										"example": [
+											0
+										],
+										"description": "タグID\n* 75 => 推しキャラ(Favorite character)\n* 76 => いい感じの何か(good stuff)\n* 77 => new_tag\n* 78 => test\n* 79 => aaa\n* 80 => うおお\n* 81 => ohoh\n* 82 => uooo test\n* 83 => waooo\n* 84 => asd\n* 85 => sdad\n* 86 => asdasd\n* 87 => saS\n* 88 => testing\n* 89 => 213\n* 90 => 321\n* 91 => 123\n* 92 => 231\n* 93 => ihasd\n* 94 => 231313\n* 95 => oiu9012\n* 96 => 8asdkjha\n* 97 => 2123\n* 98 => 8236211\n* 99 => 213123123\n* 100 => asdadasd\n* 101 => asd81\n* 102 => asdad121\n* 103 => sdasdasd\n* 104 => 213123\n* 105 => 12312312\n* 106 => sd1213\n* 107 => 781h\n* 108 => sda\n* 109 => 61hs\n* 110 => tesainsdf\n* 111 => tens\n* 112 => teai123\n* 113 => tesy\n* 114 => 21ad\n* 115 => tesribg\n* 116 => asdsad\n* 117 => s2113\n* 118 => sadsada\n* 119 => asdad\n* 120 => tesintg\n* 121 => esdfdf\n* 122 => eseres\n* 123 => xzcxcz\n* 124 => hoo\n* 125 => ttt\n* 126 => add_test\n* 127 => test_20191118\n* 128 => test_kameya\n* 129 => test___aa\n* 130 => testing 123\n* 131 => testaaaA\n* 132 => add\n* 133 => aaaa\n* 134 => eeeeee\n* 135 => you\n* 136 => wow\n* 67 => 近況(Now)\n* 68 => ランチ(Lunch)\n* 69 => おやつ(Snack)\n* 70 => 仕事風景(Work)\n* 71 => ただしい(Do right)\n* 72 => たのしい(Delight)\n* 73 => ジレンマ(dilemma)\n* 74 => めでたい"
+									},
+									"ext_col_01": {
+										"type": "array",
+										"items": {
+											"oneOf": [
+												{
+													"type": "object",
+													"description": "写真",
+													"properties": {
+														"file_id": {
+															"type": "string",
+															"pattern": "^[a-fA-F0-9]+$",
+															"default": "",
+															"example": "",
+															"description": "File ID returned by File Upload API"
+														},
+														"extension": {
+															"type": "string",
+															"pattern": "^[a-zA-Z0-9-_]+(\\.[a-zA-Z0-9-_]+)*$",
+															"default": "",
+															"example": "",
+															"description": "Extension"
+														},
+														"del_flg": {
+															"type": "integer",
+															"format": "int64",
+															"enum": [
+																0,
+																1
+															],
+															"default": 0,
+															"example": 0,
+															"description": "delete flg"
+														},
+														"description": {
+															"type": "string",
+															"default": "",
+															"example": "",
+															"description": "Description"
+														}
+													},
+													"oneOf": [
+														{
+															"properties": {
+																"del_flg": {
+																	"enum": [
+																		0
+																	]
+																}
+															},
+															"required": [
+																"file_id",
+																"extension"
+															],
+															"example": {
+																"file_id": "",
+																"extension": "",
+																"description": ""
+															}
+														},
+														{
+															"properties": {
+																"del_flg": {
+																	"enum": [
+																		1
+																	]
+																}
+															},
+															"required": [
+																"del_flg"
+															],
+															"example": {
+																"del_flg": 1
+															}
+														}
+													],
+													"additionalProperties": false
+												},
+												{
+													"type": "object",
+													"additionalProperties": false
+												}
+											]
+										},
+										"description": "写真",
+										"default": [],
+										"minItems": 0,
+										"maxItems": 5
+									},
+									"ext_col_06": {
+										"type": "object",
+										"description": "動画",
+										"properties": {
+											"file_id": {
+												"type": "string",
+												"pattern": "^[a-fA-F0-9]+$",
+												"default": "",
+												"example": "",
+												"description": "File ID returned by File Upload API"
+											},
+											"extension": {
+												"type": "string",
+												"pattern": "^[a-zA-Z0-9-_]+(\\.[a-zA-Z0-9-_]+)*$",
+												"default": "",
+												"example": "",
+												"description": "Extension"
+											},
+											"del_flg": {
+												"type": "integer",
+												"format": "int64",
+												"enum": [
+													0,
+													1
+												],
+												"default": 0,
+												"example": 0,
+												"description": "delete flg"
+											},
+											"description": {
+												"type": "string",
+												"default": "",
+												"example": "",
+												"description": "Description"
+											}
+										},
+										"oneOf": [
+											{
+												"properties": {
+													"del_flg": {
+														"enum": [
+															0
+														]
+													}
+												},
+												"required": [
+													"file_id",
+													"extension"
+												],
+												"example": {
+													"file_id": "",
+													"extension": "",
+													"description": ""
+												}
+											},
+											{
+												"properties": {
+													"del_flg": {
+														"enum": [
+															1
+														]
+													}
+												},
+												"required": [
+													"del_flg"
+												],
+												"example": {
+													"del_flg": 1
+												}
+											}
+										],
+										"additionalProperties": false
+									},
+									"ext_col_02": {
+										"type": "string",
+										"description": "コメント",
+										"default": ""
+									},
+									"ext_col_05": {
+										"type": "string",
+										"description": "投稿者所属",
+										"default": ""
+									},
+									"ext_col_04": {
+										"type": "string",
+										"description": "投稿者名",
+										"default": ""
+									},
+									"ext_col_03": {
+										"type": "string",
+										"description": "URL",
+										"default": ""
+									}
+								},
+								"additionalProperties": false,
+								"required": [
+									"subject",
+									"contents_type",
+									"ymd"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"/rcms-api/feed/delete/{topics_id}": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"post": {
+				"tags": [
+					"Topics"
+				],
+				"summary": "",
+				"description": "",
+				"parameters": [
+					{
+						"name": "topics_id",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "path",
+						"required": true,
+						"style": "simple"
+					},
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Topic is deleted"
+					}
+				}
+			}
+		},
+		"/rcms-api/feed/update/{topics_id}": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"post": {
+				"tags": [
+					"Topics"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **topics_group_id** `1`\n",
+				"parameters": [
+					{
+						"name": "topics_id",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "path",
+						"required": true,
+						"style": "simple"
+					},
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Topic is updated"
+					}
+				},
+				"requestBody": {
+					"required": true,
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"subject": {
+										"type": "string",
+										"default": "",
+										"example": "Topics Exemple Title",
+										"description": "Topic title"
+									},
+									"ymd": {
+										"type": "string",
+										"format": "date",
+										"description": "Date"
+									},
+									"open_type": {
+										"type": "string",
+										"enum": [
+											"open",
+											"close",
+											"default"
+										],
+										"default": "open",
+										"example": "open",
+										"description": "Opening to the public and closed-door"
+									},
+									"topics_flg": {
+										"type": "integer",
+										"format": "int64",
+										"enum": [
+											0,
+											1
+										],
+										"default": 1,
+										"example": 1,
+										"description": "Display all topics to logged in members, regardless ther public/hidden status"
+									},
+									"season": {
+										"type": "integer",
+										"format": "int64",
+										"default": 2020,
+										"example": 2020,
+										"description": "Season"
+									},
+									"contents": {
+										"type": "string",
+										"default": "",
+										"example": "",
+										"description": "Contents"
+									},
+									"regular_flg": {
+										"type": "integer",
+										"format": "int64",
+										"default": 0,
+										"example": 0,
+										"description": "display up"
+									},
+									"link_flg": {
+										"type": "integer",
+										"format": "int64",
+										"default": 0,
+										"example": 0,
+										"description": "Display method"
+									},
+									"link_url": {
+										"type": "string",
+										"default": "",
+										"example": "",
+										"description": "Link"
+									},
+									"contents_type": {
+										"type": "integer",
+										"format": "int64",
+										"enum": [
+											1,
+											4
+										],
+										"example": 0,
+										"description": "Category ID\n* 1 => カテゴリー①\n* 4 => カテゴリー②"
+									},
+									"tag_id": {
+										"type": "array",
+										"uniqueItems": true,
+										"items": {
+											"type": "integer",
+											"enum": [
+												75,
+												76,
+												77,
+												78,
+												79,
+												80,
+												81,
+												82,
+												83,
+												84,
+												85,
+												86,
+												87,
+												88,
+												89,
+												90,
+												91,
+												92,
+												93,
+												94,
+												95,
+												96,
+												97,
+												98,
+												99,
+												100,
+												101,
+												102,
+												103,
+												104,
+												105,
+												106,
+												107,
+												108,
+												109,
+												110,
+												111,
+												112,
+												113,
+												114,
+												115,
+												116,
+												117,
+												118,
+												119,
+												120,
+												121,
+												122,
+												123,
+												124,
+												125,
+												126,
+												127,
+												128,
+												129,
+												130,
+												131,
+												132,
+												133,
+												134,
+												135,
+												136,
+												67,
+												68,
+												69,
+												70,
+												71,
+												72,
+												73,
+												74
+											]
+										},
+										"example": [
+											0
+										],
+										"description": "タグID\n* 75 => 推しキャラ(Favorite character)\n* 76 => いい感じの何か(good stuff)\n* 77 => new_tag\n* 78 => test\n* 79 => aaa\n* 80 => うおお\n* 81 => ohoh\n* 82 => uooo test\n* 83 => waooo\n* 84 => asd\n* 85 => sdad\n* 86 => asdasd\n* 87 => saS\n* 88 => testing\n* 89 => 213\n* 90 => 321\n* 91 => 123\n* 92 => 231\n* 93 => ihasd\n* 94 => 231313\n* 95 => oiu9012\n* 96 => 8asdkjha\n* 97 => 2123\n* 98 => 8236211\n* 99 => 213123123\n* 100 => asdadasd\n* 101 => asd81\n* 102 => asdad121\n* 103 => sdasdasd\n* 104 => 213123\n* 105 => 12312312\n* 106 => sd1213\n* 107 => 781h\n* 108 => sda\n* 109 => 61hs\n* 110 => tesainsdf\n* 111 => tens\n* 112 => teai123\n* 113 => tesy\n* 114 => 21ad\n* 115 => tesribg\n* 116 => asdsad\n* 117 => s2113\n* 118 => sadsada\n* 119 => asdad\n* 120 => tesintg\n* 121 => esdfdf\n* 122 => eseres\n* 123 => xzcxcz\n* 124 => hoo\n* 125 => ttt\n* 126 => add_test\n* 127 => test_20191118\n* 128 => test_kameya\n* 129 => test___aa\n* 130 => testing 123\n* 131 => testaaaA\n* 132 => add\n* 133 => aaaa\n* 134 => eeeeee\n* 135 => you\n* 136 => wow\n* 67 => 近況(Now)\n* 68 => ランチ(Lunch)\n* 69 => おやつ(Snack)\n* 70 => 仕事風景(Work)\n* 71 => ただしい(Do right)\n* 72 => たのしい(Delight)\n* 73 => ジレンマ(dilemma)\n* 74 => めでたい"
+									},
+									"ext_col_01": {
+										"type": "array",
+										"items": {
+											"oneOf": [
+												{
+													"type": "object",
+													"description": "写真",
+													"properties": {
+														"file_id": {
+															"type": "string",
+															"pattern": "^[a-fA-F0-9]+$",
+															"default": "",
+															"example": "",
+															"description": "File ID returned by File Upload API"
+														},
+														"extension": {
+															"type": "string",
+															"pattern": "^[a-zA-Z0-9-_]+(\\.[a-zA-Z0-9-_]+)*$",
+															"default": "",
+															"example": "",
+															"description": "Extension"
+														},
+														"del_flg": {
+															"type": "integer",
+															"format": "int64",
+															"enum": [
+																0,
+																1
+															],
+															"default": 0,
+															"example": 0,
+															"description": "delete flg"
+														},
+														"description": {
+															"type": "string",
+															"default": "",
+															"example": "",
+															"description": "Description"
+														}
+													},
+													"oneOf": [
+														{
+															"properties": {
+																"del_flg": {
+																	"enum": [
+																		0
+																	]
+																}
+															},
+															"required": [
+																"file_id",
+																"extension"
+															],
+															"example": {
+																"file_id": "",
+																"extension": "",
+																"description": ""
+															}
+														},
+														{
+															"properties": {
+																"del_flg": {
+																	"enum": [
+																		1
+																	]
+																}
+															},
+															"required": [
+																"del_flg"
+															],
+															"example": {
+																"del_flg": 1
+															}
+														}
+													],
+													"additionalProperties": false
+												},
+												{
+													"type": "object",
+													"additionalProperties": false
+												}
+											]
+										},
+										"description": "写真",
+										"default": [],
+										"minItems": 0,
+										"maxItems": 5
+									},
+									"ext_col_06": {
+										"type": "object",
+										"description": "動画",
+										"properties": {
+											"file_id": {
+												"type": "string",
+												"pattern": "^[a-fA-F0-9]+$",
+												"default": "",
+												"example": "",
+												"description": "File ID returned by File Upload API"
+											},
+											"extension": {
+												"type": "string",
+												"pattern": "^[a-zA-Z0-9-_]+(\\.[a-zA-Z0-9-_]+)*$",
+												"default": "",
+												"example": "",
+												"description": "Extension"
+											},
+											"del_flg": {
+												"type": "integer",
+												"format": "int64",
+												"enum": [
+													0,
+													1
+												],
+												"default": 0,
+												"example": 0,
+												"description": "delete flg"
+											},
+											"description": {
+												"type": "string",
+												"default": "",
+												"example": "",
+												"description": "Description"
+											}
+										},
+										"oneOf": [
+											{
+												"properties": {
+													"del_flg": {
+														"enum": [
+															0
+														]
+													}
+												},
+												"required": [
+													"file_id",
+													"extension"
+												],
+												"example": {
+													"file_id": "",
+													"extension": "",
+													"description": ""
+												}
+											},
+											{
+												"properties": {
+													"del_flg": {
+														"enum": [
+															1
+														]
+													}
+												},
+												"required": [
+													"del_flg"
+												],
+												"example": {
+													"del_flg": 1
+												}
+											}
+										],
+										"additionalProperties": false
+									},
+									"ext_col_02": {
+										"type": "string",
+										"description": "コメント",
+										"default": ""
+									},
+									"ext_col_05": {
+										"type": "string",
+										"description": "投稿者所属",
+										"default": ""
+									},
+									"ext_col_04": {
+										"type": "string",
+										"description": "投稿者名",
+										"default": ""
+									},
+									"ext_col_03": {
+										"type": "string",
+										"description": "URL",
+										"default": ""
+									}
+								},
+								"additionalProperties": false,
+								"required": []
+							}
+						}
+					}
+				}
+			}
+		},
+		"/rcms-api/members/{member_id}": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"get": {
+				"tags": [
+					"Members"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **group_id** `1`\n",
+				"parameters": [
+					{
+						"name": "member_id",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "path",
+						"required": true,
+						"style": "simple"
+					},
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Fetch the details for a given member"
+					}
+				}
+			}
+		},
+		"/rcms-api/members": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"get": {
+				"tags": [
+					"Members"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **subData_flg** `1`\n",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					},
+					{
+						"name": "id[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"format": "int64"
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Member ID"
+					},
+					{
+						"name": "cnt",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Number of topics per page"
+					},
+					{
+						"name": "pageID",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Page ID"
+					},
+					{
+						"name": "s_name",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Member search"
+					},
+					{
+						"name": "s_email",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Member search"
+					},
+					{
+						"name": "s_tel",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Member search"
+					},
+					{
+						"name": "s_address",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Member search"
+					},
+					{
+						"name": "s_tdfk_cd",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Member search"
+					},
+					{
+						"name": "group_id",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Member search"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "List"
+					}
+				}
+			}
+		},
+		"/rcms-api/member/update": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"post": {
+				"tags": [
+					"Members"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **unuse_columns** `email`\n\n> **mode_for_mail_auth** `UPDATE_MAIL`\n",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "My member infomation is updated"
+					}
+				},
+				"requestBody": {
+					"required": true,
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"nickname": {
+										"type": "string",
+										"format": "",
+										"description": "Nickname",
+										"example": ""
+									},
+									"member_photo": {
+										"description": "Image1",
+										"type": "object",
+										"properties": {
+											"file_id": {
+												"type": "string",
+												"pattern": "^[a-fA-F0-9]+$",
+												"default": "",
+												"example": "",
+												"description": "File ID returned by File Upload API"
+											},
+											"extension": {
+												"type": "string",
+												"pattern": "^[a-zA-Z0-9-_]+(\\.[a-zA-Z0-9-_]+)*$",
+												"default": "",
+												"example": "",
+												"description": "Extension"
+											},
+											"del_flg": {
+												"type": "integer",
+												"format": "int64",
+												"enum": [
+													0,
+													1
+												],
+												"default": 0,
+												"example": 0,
+												"description": "delete flg"
+											},
+											"description": {
+												"type": "string",
+												"default": "",
+												"example": "",
+												"description": "Description"
+											}
+										},
+										"oneOf": [
+											{
+												"properties": {
+													"del_flg": {
+														"enum": [
+															0
+														]
+													}
+												},
+												"required": [
+													"file_id",
+													"extension"
+												],
+												"example": {
+													"file_id": "",
+													"extension": "",
+													"description": ""
+												}
+											},
+											{
+												"properties": {
+													"del_flg": {
+														"enum": [
+															1
+														]
+													}
+												},
+												"required": [
+													"del_flg"
+												],
+												"example": {
+													"del_flg": 1
+												}
+											}
+										],
+										"additionalProperties": false
+									}
+								},
+								"additionalProperties": false,
+								"required": [
+									"nickname"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"/rcms-api/comments": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"get": {
+				"tags": [
+					"Comments"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **groupBy** `module_id`\n\n> **groupAs** `array`\n\n> **module_type** `topics`\n\n> **new_order_flg** `1`\n",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					},
+					{
+						"name": "new_order_flg",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "To the display the newest use 1. Default: 0"
+					},
+					{
+						"name": "cnt",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Display number per page"
+					},
+					{
+						"name": "pageID",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Page ID"
+					},
+					{
+						"name": "module_id[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"format": "int64"
+							},
+							"minItems": 1
+						},
+						"in": "query",
+						"required": true,
+						"style": "form",
+						"explode": true,
+						"description": "モジュールID"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Comments List"
+					}
+				}
+			}
+		},
+		"/rcms-api/comment/create": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"post": {
+				"tags": [
+					"Comments"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **use_module_type** `topics`\n",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Comment detail"
+					}
+				},
+				"requestBody": {
+					"required": true,
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"module_id": {
+										"type": "integer",
+										"format": "int64",
+										"description": "モジュールID"
+									},
+									"name": {
+										"type": "string",
+										"format": "",
+										"example": "My Name",
+										"description": "Name"
+									},
+									"mail": {
+										"type": "string",
+										"format": "email",
+										"example": "email@example.com",
+										"description": "Mail"
+									},
+									"url": {
+										"type": "string",
+										"format": "uri",
+										"example": "https://www.example.com",
+										"description": "URL"
+									},
+									"note": {
+										"type": "string",
+										"format": "",
+										"example": "My Comment",
+										"description": "Comments"
+									},
+									"delkey": {
+										"type": "string",
+										"format": "password",
+										"example": "",
+										"description": "削除キー"
+									}
+								},
+								"additionalProperties": false,
+								"required": [
+									"module_id",
+									"name",
+									"note"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"/rcms-api/comment/delete": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"post": {
+				"tags": [
+					"Comments"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **use_module_type** `topics`\n",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Comment detail"
+					}
+				},
+				"requestBody": {
+					"required": true,
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"comment_id": {
+										"type": "integer",
+										"format": "int64",
+										"description": "コメントID"
+									},
+									"delkey": {
+										"type": "string",
+										"format": "password",
+										"description": "削除キー"
+									}
+								},
+								"additionalProperties": false,
+								"required": [
+									"comment_id"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"/rcms-api/favorite/create": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"post": {
+				"tags": [
+					"Favorites"
+				],
+				"summary": "",
+				"description": "",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Favorite"
+					}
+				},
+				"requestBody": {
+					"required": true,
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"module_type": {
+										"type": "string",
+										"format": "",
+										"example": "topics",
+										"description": "Module type"
+									},
+									"module_id": {
+										"type": "integer",
+										"format": "int64",
+										"description": "module_id"
+									},
+									"page_sysnm": {
+										"type": "string",
+										"format": "",
+										"example": "",
+										"description": "ページシステム名"
+									}
+								},
+								"additionalProperties": false,
+								"required": [
+									"module_type",
+									"module_id"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"/rcms-api/favorite/delete": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"post": {
+				"tags": [
+					"Favorites"
+				],
+				"summary": "",
+				"description": "",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Favorite"
+					}
+				},
+				"requestBody": {
+					"required": true,
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"module_type": {
+										"type": "string",
+										"format": "",
+										"example": "topics",
+										"description": "Module type"
+									},
+									"module_id": {
+										"type": "integer",
+										"format": "int64",
+										"description": "module_id"
+									},
+									"page_sysnm": {
+										"type": "string",
+										"format": "",
+										"example": "",
+										"description": "ページシステム名"
+									}
+								},
+								"additionalProperties": false,
+								"required": [
+									"module_type",
+									"module_id"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"/rcms-api/favorites": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"get": {
+				"tags": [
+					"Favorites"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **groupBy** `module_id`\n\n> **groupAs** `array`\n\n> **module_type** `topics`\n\n> **order** `inst_ymdhi:desc`\n\n> **my_list** `0`\n",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					},
+					{
+						"name": "cnt",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Display number per page"
+					},
+					{
+						"name": "pageID",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Page ID"
+					},
+					{
+						"name": "module_id[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"format": "int64"
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": ""
+					},
+					{
+						"name": "member_id[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"format": "int64"
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Member ID"
+					},
+					{
+						"name": "rcmsid[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"format": ""
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "rcmsid"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Favorites"
+					}
+				}
+			}
+		},
+		"/rcms-api/favorites/mylist": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"get": {
+				"tags": [
+					"Favorites"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **module_type** `topics`\n\n> **cnt** `10`\n\n> **order** `inst_ymdhi:desc`\n\n> **my_list** `1`\n",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					},
+					{
+						"name": "cnt",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Display number per page"
+					},
+					{
+						"name": "pageID",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Page ID"
+					},
+					{
+						"name": "module_id[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"format": "int64"
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": ""
+					},
+					{
+						"name": "groupBy",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Grouping List by (module_id)"
+					},
+					{
+						"name": "groupAs",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Grouping List as (array or object)"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Favorites"
+					}
+				}
+			}
+		},
+		"/rcms-api/file/upload": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"post": {
+				"tags": [
+					"Files"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **size** `0`\n",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "File was uploaded"
+					},
+					"422": {
+						"description": "Validation error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				},
+				"requestBody": {
+					"required": false,
+					"description": "",
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"file": {
+										"type": "string",
+										"format": "binary",
+										"description": "Upload file"
+									}
+								},
+								"additionalProperties": false,
+								"required": [
+									"file"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"/rcms-api/tags": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"get": {
+				"tags": [
+					"Tags"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **groupBy** `module_id`\n\n> **groupAs** `array`\n",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					},
+					{
+						"name": "order[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"format": ""
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Set the sort order. Available param {0}"
+					},
+					{
+						"name": "pageID",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Page ID"
+					},
+					{
+						"name": "id[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"format": "int64"
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Tag IDs that you would like to display"
+					},
+					{
+						"name": "category_id[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"format": "int64"
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "ID of the tag category to be displayed. (Default: All)"
+					},
+					{
+						"name": "module_id[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"format": "int64"
+							},
+							"minItems": 1
+						},
+						"in": "query",
+						"required": true,
+						"style": "form",
+						"explode": true,
+						"description": "module_id"
+					},
+					{
+						"name": "module_type",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": true,
+						"style": "form",
+						"explode": true,
+						"description": "Module type"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Fetched a the tag list"
+					},
+					"404": {
+						"description": "No tags for the current ID"
+					}
+				}
+			}
+		},
+		"/rcms-api/tag/create": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"post": {
+				"tags": [
+					"Tags"
+				],
+				"summary": "",
+				"description": "",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Tag is inserted"
+					}
+				},
+				"requestBody": {
+					"required": true,
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"tag_nm": {
+										"type": "string",
+										"example": "Tag Title",
+										"description": "Title"
+									},
+									"tag_category_id": {
+										"type": "integer",
+										"format": "int64",
+										"example": 0,
+										"default": 0,
+										"description": "Category ID"
+									},
+									"open_type": {
+										"type": "string",
+										"format": "",
+										"enum": [
+											"open",
+											"close",
+											"default"
+										],
+										"example": "open",
+										"default": "open",
+										"description": "Opening to the public and closed-door"
+									},
+									"weight": {
+										"type": "integer",
+										"format": "int64",
+										"example": 0,
+										"default": 0,
+										"description": "Sort"
+									},
+									"ext_col_01": {
+										"type": "string",
+										"format": "",
+										"description": "ext_col_01",
+										"example": ""
+									},
+									"ext_col_02": {
+										"type": "string",
+										"format": "",
+										"description": "ext_col_02",
+										"example": ""
+									},
+									"ext_col_03": {
+										"type": "string",
+										"format": "",
+										"description": "ext_col_03",
+										"example": ""
+									},
+									"ext_col_04": {
+										"type": "string",
+										"format": "",
+										"description": "ext_col_04",
+										"example": ""
+									},
+									"ext_col_05": {
+										"type": "string",
+										"format": "",
+										"description": "ext_col_05",
+										"example": ""
+									},
+									"ext_col_06": {
+										"type": "string",
+										"format": "",
+										"description": "ext_col_06",
+										"example": ""
+									},
+									"ext_col_07": {
+										"type": "string",
+										"format": "",
+										"description": "ext_col_07",
+										"example": ""
+									},
+									"ext_col_08": {
+										"type": "string",
+										"format": "",
+										"description": "ext_col_08",
+										"example": ""
+									},
+									"ext_col_09": {
+										"type": "string",
+										"format": "",
+										"description": "ext_col_09",
+										"example": ""
+									},
+									"ext_col_10": {
+										"type": "string",
+										"format": "",
+										"description": "ext_col_10",
+										"example": ""
+									}
+								},
+								"additionalProperties": false,
+								"required": [
+									"tag_nm"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"/rcms-api/tags/category_grouped": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"get": {
+				"tags": [
+					"Tags"
+				],
+				"summary": "",
+				"description": "\n## Controller parameters\n\n> **groupBy** `category`\n\n> **groupAs** `array`\n",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					},
+					{
+						"name": "order[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"format": ""
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Set the sort order. Available param {0}"
+					},
+					{
+						"name": "pageID",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Page ID"
+					},
+					{
+						"name": "id[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"format": "int64"
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Tag IDs that you would like to display"
+					},
+					{
+						"name": "category_id[]",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"format": "int64"
+							},
+							"minItems": 0
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "ID of the tag category to be displayed. (Default: All)"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Fetched a the tag list"
+					},
+					"404": {
+						"description": "No tags for the current ID"
+					}
+				}
+			}
+		},
+		"/rcms-api/openapi_data": {
+			"summary": "Operations Summary",
+			"description": "Operations Desc",
+			"get": {
+				"tags": [
+					"API"
+				],
+				"summary": "",
+				"description": "",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					},
+					{
+						"name": "api_id",
+						"schema": {
+							"type": "integer",
+							"format": "int64"
+						},
+						"in": "query",
+						"required": true,
+						"style": "form",
+						"explode": true,
+						"description": "API ID"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "API description in OpenApi format for given API ID"
+					}
+				}
+			}
+		}
+	}
+}
