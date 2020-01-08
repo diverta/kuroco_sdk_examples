@@ -4,12 +4,12 @@
 
 ## executing
 
-runs web-server based on the framework which you specified.  
+this project aims to help to make you understand easily with running a web-server with famous framework which you specified.
 please refer to following commands, and check out `package-scripts.js`.
 
 ```
 npm i && \
-npx nps ${framwrokName}
+npx nps ${framwrokName} // please specify a framework you want to check.
 ```
 
 > :warning: **NOTICE**  
