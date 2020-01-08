@@ -1,0 +1,13 @@
+{
+  "name": "kuroco-sdk-examples",
+  "version": "1.0.0",
+  "description": "examples of JS/TS frameworks with Kuroco auto-generated codes.",
+  "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "none",
+  "devDependencies": {
+    "npmrc": "^1.1.1",
+    "nps": "^5.9.12"
+  }
+}
