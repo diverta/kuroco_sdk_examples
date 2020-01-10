@@ -15,7 +15,7 @@ npx nps ${framwrokName} // please specify a framework you want to check.
 > :warning: **NOTICE**  
 > some example needs dummyAPI which is invoked by Kuroco SDK.  
 > in the case of this, you can run one by following commands.  
-> `npm i -g @kuroco/cli --registry http://35.190.232.54 && kuroco sercedummy`
+> `npm i -g @kuroco/cli --registry http://35.190.232.54 && kuroco servedummy`
 
 ## dirs
 

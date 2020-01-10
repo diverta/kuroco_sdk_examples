@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "jquery": "^3.4.1",
-    "kuroco": "file:../kuroco"
+    "kuroco": "file:../../kuroco"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

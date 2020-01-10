@@ -4,18 +4,27 @@ import { TopicsApi, useDevServer } from "kuroco";
 useDevServer(true);
 
 $(function() {
-  const $content = $("#content");
-  getTopicsList().then(list => {
-    const topicsIDs = list.map(({ topics_id }) => topics_id).join("\n");
-
-    $content.fadeOut("slow", function() {
-      $content
-        .text(topicsIDs)
-        .css("color", "red")
-        .fadeIn("slow");
+  getTopicsList()
+    .then(list => {
+      const topicsIDsMsg = list.map(({ topics_id }) => topics_id).join("\n");
+      renderMsg(topicsIDsMsg);
+    })
+    .catch(err => {
+      renderMsg(
+        ["Oops! something error was occured!", err.toString()].join("\n")
+      );
     });
-  });
 });
+
+function renderMsg(msg) {
+  const $content = $("#content");
+  $content.fadeOut("slow", function() {
+    $content
+      .text(msg)
+      .css("color", "red")
+      .fadeIn("slow");
+  });
+}
 
 function getTopicsList() {
   const topicsApi = new TopicsApi();

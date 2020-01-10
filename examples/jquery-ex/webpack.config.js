@@ -16,7 +16,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: [/node_modules/, path.resolve(__dirname, "..", "kuroco")],
+        exclude: [/node_modules/, /kuroco/],
         use: {
           loader: "babel-loader",
           options: {
