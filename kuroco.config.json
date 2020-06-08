@@ -1,9 +1,15 @@
 {
-  "api_token": "TOKEN",
-  "api_host": "https://demo.picol.app",
-  "api_name": "rcms-api",
-  "dummy_server_port": 3000,
-  "dummy_server_client_port": 30000,
-  "doc_port": 9999,
-  "configure_root": "./apiconfig"
+	"sdk_key": "5ca00b78027561a183880e4084e63c14",
+	"api_url": "https://picol.kuroco-mng.app/",
+	"gcp": {
+		"firebaseConfig": {
+			"apiKey": "AIzaSyAcIlLYHomXJsTe6A2_T_YpBV1T8UdeuTg",
+			"authDomain": "picol-c8553.firebaseapp.com",
+			"databaseURL": "https://picol-c8553.firebaseio.com",
+			"projectId": "picol-c8553",
+			"storageBucket": "picol-c8553.appspot.com",
+			"messagingSenderId": "700928827304",
+			"appId": "1:700928827304:web:0bf7ab839e771174bc479d"
+		}
+	}
 }
