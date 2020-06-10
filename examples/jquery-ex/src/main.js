@@ -1,12 +1,11 @@
-import $ from "jquery";
-import { TopicsApi, useDevServer } from "kuroco";
+import * as $ from 'jQuery';
+import { TopicsService } from 'kuroco/services/TopicsService';
+import { Auth } from 'kuroco/core/Auth';
 
-useDevServer(true);
-
-$(function() {
+$(() => {
   getTopicsList()
-    .then(list => {
-      const topicsIDsMsg = list.map(({ topics_id }) => topics_id).join("\n");
+    .then(res => {
+      const topicsIDsMsg = res.list.map(({ topics_id }) => topics_id).join("\n");
       renderMsg(topicsIDsMsg);
     })
     .catch(err => {
@@ -18,7 +17,7 @@ $(function() {
 
 function renderMsg(msg) {
   const $content = $("#content");
-  $content.fadeOut("slow", function() {
+  $content.fadeOut("slow", () => {
     $content
       .text(msg)
       .css("color", "red")
@@ -26,10 +25,9 @@ function renderMsg(msg) {
   });
 }
 
-function getTopicsList() {
-  const topicsApi = new TopicsApi();
-  return topicsApi
-    .rcmsApiFeedsGet({})
-    .then(responseRaw => responseRaw.value())
-    .then(responseFeed => responseFeed.list);
+async function getTopicsList() {
+  await Auth.login({
+    requestBody: { email: 'test', password: 'qwer1234' },
+  })
+  return await TopicsService.getTopicsServiceRcmsApi1Topics1({});
 }

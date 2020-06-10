@@ -31,6 +31,8 @@ module.exports = {
     openPage: "index.html",
     contentBase: path.join(__dirname, "public"),
     watchContentBase: true,
-    port: 10000
+    https: true,
+    host: 'localhost',
+    port: 9000,
   }
 };
