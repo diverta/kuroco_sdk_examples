@@ -8,7 +8,8 @@
   "license": "none",
   "devDependencies": {
     "npmrc": "^1.1.1",
-    "nps": "^5.9.12"
+    "nps": "^5.9.12",
+    "webpack-cli": "^3.3.11"
   },
   "dependencies": {
     "firebase": "^7.15.0"
