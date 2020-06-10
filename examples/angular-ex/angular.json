@@ -63,7 +63,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-ex:build"
+            "browserTarget": "angular-ex:build",
+            "ssl": true,
+            "port": 9000
           },
           "configurations": {
             "production": {

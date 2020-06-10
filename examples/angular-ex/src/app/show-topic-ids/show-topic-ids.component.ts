@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { TopicsApi } from "kuroco";
+import { Auth } from "kuroco/core/Auth";
+import { TopicsService } from "kuroco/services/TopicsService";
 
 @Component({
   selector: "app-show-topic-ids",
@@ -12,13 +13,14 @@ export class ShowTopicIDsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.getTopicsList();
+    this.getTopicsList()
+      .then(res => this.list = res.list);
   }
 
   async getTopicsList() {
-    const topicsApi = new TopicsApi();
-    const responseRaw = await topicsApi.rcmsApiFeedsGet({});
-    const responseFeed = await responseRaw.value();
-    this.list = responseFeed.list;
+    await Auth.login({
+      requestBody: { email: 'test', password: 'qwer1234' },
+    })
+    return await TopicsService.getTopicsServiceRcmsApi1Topics1({});
   }
 }
