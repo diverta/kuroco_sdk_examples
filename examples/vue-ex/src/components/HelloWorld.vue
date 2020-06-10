@@ -2,8 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
-      Rendering topicsIDs from dummyAPI.
-      <br />Please run <code>kuroco servedummy</code> before serve this App.
+      Rendering topicsIDs from the server.
     </p>
     <div v-for="({ topics_id }, idx) in list" :key="idx">
       <span>{{ topics_id }}</span>
@@ -12,7 +11,8 @@
 </template>
 
 <script>
-import { TopicsApi } from "kuroco";
+import { TopicsService } from 'kuroco/services/TopicsService';
+import { Auth } from 'kuroco/core/Auth';
 
 export default {
   name: "HelloWorld",
@@ -21,19 +21,20 @@ export default {
   },
   data() {
     return {
-      list: []
+      list: [],
     };
   },
   mounted() {
-    getTopicsList().then(list => this.list.push(...list));
+    getTopicsList()
+      .then(res => this.list = res.list)
   }
 };
 
 async function getTopicsList() {
-  const topicsApi = new TopicsApi();
-  const responseRaw = await topicsApi.rcmsApiFeedsGet({});
-  const responseFeed = await responseRaw.value();
-  return responseFeed.list;
+  await Auth.login({
+    requestBody: { email: 'test', password: 'qwer1234' },
+  })
+  return await TopicsService.getTopicsServiceRcmsApi1Topics1({});
 }
 </script>
 
