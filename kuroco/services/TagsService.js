@@ -1,4 +1,3 @@
-"use strict";
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -12,26 +11,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.TagsService = void 0;
-const ApiError_1 = require("../core/ApiError");
-const request_1 = require("../core/request");
-const OpenAPI_1 = require("../core/OpenAPI");
-const Auth_1 = require("../core/Auth");
-class TagsService {
+import { catchGenericError } from '../core/ApiError';
+import { request as __request } from '../core/request';
+import { OpenAPI } from '../core/OpenAPI';
+import { LocalStorage } from '../core/LocalStorage';
+export class TagsService {
     /**
      *
      * ### **Tag::list (v1)**
      *
      *
-     * ## Controller parameters
-     *
-     * > **groupBy** `module_id`
-     *
-     * > **groupAs** `array`
-     *
-     * @param moduleId module_id
-     * @param moduleType Module type
      * @param outputFormat Format (json|xml|csv)
      * @param lang Language
      * @param charset Charset
@@ -39,22 +28,22 @@ class TagsService {
      * @param pageId Page ID
      * @param id Tag IDs that you would like to display
      * @param categoryId ID of the tag category to be displayed. (Default: All)
+     * @param groupBy Grouping List by (module_id / category)
+     * @param groupAs Grouping List as (array or object)
      * @result any
      * @throws ApiError
      */
     static getTagsServiceRcmsApi1Tags(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
                     method: 'get',
                     path: `/rcms-api/1/tags`,
                     query: {
-                        'module_id[]': requestParam.moduleId,
-                        'module_type': requestParam.moduleType,
                         '_output_format': requestParam.outputFormat,
                         '_lang': requestParam.lang,
                         '_charset': requestParam.charset,
@@ -62,14 +51,16 @@ class TagsService {
                         'pageID': requestParam.pageId,
                         'id[]': requestParam.id,
                         'category_id[]': requestParam.categoryId,
+                        'groupBy': requestParam.groupBy,
+                        'groupAs': requestParam.groupAs,
                     },
                 });
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
             return result.body;
         });
     }
@@ -85,16 +76,16 @@ class TagsService {
      * @result any
      * @throws ApiError
      */
-    static postTagsServiceRcmsApi1TagCreate(requestParam) {
+    static postTagsServiceRcmsApi1TagsInsert(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
-                    path: `/rcms-api/1/tag/create`,
+                    path: `/rcms-api/1/tags/insert`,
                     query: {
                         '_output_format': requestParam.outputFormat,
                         '_lang': requestParam.lang,
@@ -105,68 +96,52 @@ class TagsService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
             return result.body;
         });
     }
     /**
      *
-     * ### **Tag::list (v1)**
+     * ### **Tag::delete (v1)**
      *
      *
-     * ## Controller parameters
-     *
-     * > **groupBy** `category`
-     *
-     * > **groupAs** `array`
-     *
-     * > **order** `category_weight:desc`
-     *
+     * @param tagId
      * @param outputFormat Format (json|xml|csv)
      * @param lang Language
      * @param charset Charset
-     * @param order Set the sort order. Available param {0}
-     * @param pageId Page ID
-     * @param id Tag IDs that you would like to display
-     * @param categoryId ID of the tag category to be displayed. (Default: All)
      * @result any
      * @throws ApiError
      */
-    static getTagsServiceRcmsApi1TagsCategoryGrouped(requestParam) {
+    static postTagsServiceRcmsApi1TagsDeleteTagId(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
-                    method: 'get',
-                    path: `/rcms-api/1/tags/category_grouped`,
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
+                    method: 'post',
+                    path: `/rcms-api/1/tags/delete/${requestParam.tagId}`,
                     query: {
                         '_output_format': requestParam.outputFormat,
                         '_lang': requestParam.lang,
                         '_charset': requestParam.charset,
-                        'order[]': requestParam.order,
-                        'pageID': requestParam.pageId,
-                        'id[]': requestParam.id,
-                        'category_id[]': requestParam.categoryId,
                     },
                 });
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
             return result.body;
         });
     }
 }
-exports.TagsService = TagsService;
 (function (TagsService) {
     ;
     ;
     ;
-})(TagsService = exports.TagsService || (exports.TagsService = {}));
+})(TagsService || (TagsService = {}));

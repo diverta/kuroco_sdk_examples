@@ -1,4 +1,3 @@
-"use strict";
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -12,13 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.CommentsService = void 0;
-const ApiError_1 = require("../core/ApiError");
-const request_1 = require("../core/request");
-const OpenAPI_1 = require("../core/OpenAPI");
-const Auth_1 = require("../core/Auth");
-class CommentsService {
+import { catchGenericError } from '../core/ApiError';
+import { request as __request } from '../core/request';
+import { OpenAPI } from '../core/OpenAPI';
+import { LocalStorage } from '../core/LocalStorage';
+export class CommentsService {
     /**
      *
      * ### **Comment::list (v1)**
@@ -26,13 +23,7 @@ class CommentsService {
      *
      * ## Controller parameters
      *
-     * > **groupBy** `module_id`
-     *
-     * > **groupAs** `array`
-     *
      * > **module_type** `topics`
-     *
-     * > **new_order_flg** `1`
      *
      * @param moduleId モジュールID
      * @param outputFormat Format (json|xml|csv)
@@ -43,19 +34,21 @@ class CommentsService {
      * @param pageId Page ID
      * @param fromDate Posted Date
      * @param toDate Posted Date
+     * @param groupBy Grouping List by (module_id)
+     * @param groupAs Grouping List as (array or object)
      * @result any
      * @throws ApiError
      */
-    static getCommentsServiceRcmsApi1Comments(requestParam) {
+    static getCommentsServiceRcmsApi1TopicsComments(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
                     method: 'get',
-                    path: `/rcms-api/1/comments`,
+                    path: `/rcms-api/1/topics/comments`,
                     query: {
                         'module_id[]': requestParam.moduleId,
                         '_output_format': requestParam.outputFormat,
@@ -66,14 +59,16 @@ class CommentsService {
                         'pageID': requestParam.pageId,
                         'from_date': requestParam.fromDate,
                         'to_date': requestParam.toDate,
+                        'groupBy': requestParam.groupBy,
+                        'groupAs': requestParam.groupAs,
                     },
                 });
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
             return result.body;
         });
     }
@@ -93,16 +88,16 @@ class CommentsService {
      * @result any
      * @throws ApiError
      */
-    static postCommentsServiceRcmsApi1CommentCreate(requestParam) {
+    static postCommentsServiceRcmsApi1TopicsCommentsInsert(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
-                    path: `/rcms-api/1/comment/create`,
+                    path: `/rcms-api/1/topics/comments/insert`,
                     query: {
                         '_output_format': requestParam.outputFormat,
                         '_lang': requestParam.lang,
@@ -113,9 +108,51 @@ class CommentsService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
+            return result.body;
+        });
+    }
+    /**
+     *
+     * ### **Comment::update (v1)**
+     *
+     *
+     * ## Controller parameters
+     *
+     * > **use_module_type** `topics`
+     *
+     * @param requestBody
+     * @param outputFormat Format (json|xml|csv)
+     * @param lang Language
+     * @param charset Charset
+     * @result any
+     * @throws ApiError
+     */
+    static postCommentsServiceRcmsApi1TopicsCommentsUpdate(requestParam) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const shouldHookToken = Object.keys({
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
+            }).length > 0;
+            const request = () => __awaiter(this, void 0, void 0, function* () {
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
+                    method: 'post',
+                    path: `/rcms-api/1/topics/comments/update`,
+                    query: {
+                        '_output_format': requestParam.outputFormat,
+                        '_lang': requestParam.lang,
+                        '_charset': requestParam.charset,
+                    },
+                    body: requestParam.requestBody,
+                });
+            });
+            let result = yield request();
+            if (shouldHookToken && !result.ok && result.status === 401) {
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
+            }
+            catchGenericError(result);
             return result.body;
         });
     }
@@ -135,16 +172,16 @@ class CommentsService {
      * @result any
      * @throws ApiError
      */
-    static postCommentsServiceRcmsApi1CommentDelete(requestParam) {
+    static postCommentsServiceRcmsApi1TopicsCommentsDelete(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
-                    path: `/rcms-api/1/comment/delete`,
+                    path: `/rcms-api/1/topics/comments/delete`,
                     query: {
                         '_output_format': requestParam.outputFormat,
                         '_lang': requestParam.lang,
@@ -155,16 +192,16 @@ class CommentsService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
             return result.body;
         });
     }
 }
-exports.CommentsService = CommentsService;
 (function (CommentsService) {
     ;
     ;
     ;
-})(CommentsService = exports.CommentsService || (exports.CommentsService = {}));
+    ;
+})(CommentsService || (CommentsService = {}));

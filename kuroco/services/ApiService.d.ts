@@ -1,7 +1,7 @@
 export declare class ApiService {
     /**
      *
-     * ### **Api::request_api (v1)**
+     * ### **Api::list (v1)**
      *
      *
      * @param outputFormat Format (json|xml|csv)
@@ -10,7 +10,20 @@ export declare class ApiService {
      * @result any
      * @throws ApiError
      */
-    static getApiServiceRcmsApi1Slack(requestParam: ApiService.getApiServiceRcmsApi1SlackRequest): Promise<any>;
+    static getApiServiceRcmsApi1Apis(requestParam: ApiService.getApiServiceRcmsApi1ApisRequest): Promise<any>;
+    /**
+     *
+     * ### **Api::openapi_data (v1)**
+     *
+     *
+     * @param apiId API ID
+     * @param outputFormat Format (json|xml|csv)
+     * @param lang Language
+     * @param charset Charset
+     * @result any
+     * @throws ApiError
+     */
+    static getApiServiceRcmsApi1Openapi(requestParam: ApiService.getApiServiceRcmsApi1OpenapiRequest): Promise<any>;
     /**
      *
      * ### **Api::request_api (v1)**
@@ -22,37 +35,27 @@ export declare class ApiService {
      * @result any
      * @throws ApiError
      */
-    static getApiServiceRcmsApi1Test2(requestParam: ApiService.getApiServiceRcmsApi1Test2Request): Promise<any>;
-    /**
-     *
-     * ### **Api::request_api (v1)**
-     *
-     *
-     * @param outputFormat Format (json|xml|csv)
-     * @param lang Language
-     * @param charset Charset
-     * @result any
-     * @throws ApiError
-     */
-    static getApiServiceRcmsApi1Sendmail(requestParam: ApiService.getApiServiceRcmsApi1SendmailRequest): Promise<any>;
+    static getApiServiceRcmsApi1Request(requestParam: ApiService.getApiServiceRcmsApi1RequestRequest): Promise<any>;
 }
 export declare namespace ApiService {
-    interface getApiServiceRcmsApi1SlackRequest {
+    interface getApiServiceRcmsApi1ApisRequest {
         outputFormat?: string;
         lang?: string;
         charset?: string;
     }
-    type getApiServiceRcmsApi1SlackResponse = any;
-    interface getApiServiceRcmsApi1Test2Request {
+    type getApiServiceRcmsApi1ApisResponse = any;
+    interface getApiServiceRcmsApi1OpenapiRequest {
+        apiId: number;
         outputFormat?: string;
         lang?: string;
         charset?: string;
     }
-    type getApiServiceRcmsApi1Test2Response = any;
-    interface getApiServiceRcmsApi1SendmailRequest {
+    type getApiServiceRcmsApi1OpenapiResponse = any;
+    interface getApiServiceRcmsApi1RequestRequest {
         outputFormat?: string;
         lang?: string;
         charset?: string;
     }
-    type getApiServiceRcmsApi1SendmailResponse = any;
+    type getApiServiceRcmsApi1RequestResponse = any;
 }
+//# sourceMappingURL=ApiService.d.ts.map

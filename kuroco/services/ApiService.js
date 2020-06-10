@@ -1,4 +1,3 @@
-"use strict";
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -12,16 +11,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ApiService = void 0;
-const ApiError_1 = require("../core/ApiError");
-const request_1 = require("../core/request");
-const OpenAPI_1 = require("../core/OpenAPI");
-const Auth_1 = require("../core/Auth");
-class ApiService {
+import { catchGenericError } from '../core/ApiError';
+import { request as __request } from '../core/request';
+import { OpenAPI } from '../core/OpenAPI';
+import { LocalStorage } from '../core/LocalStorage';
+export class ApiService {
     /**
      *
-     * ### **Api::request_api (v1)**
+     * ### **Api::list (v1)**
      *
      *
      * @param outputFormat Format (json|xml|csv)
@@ -30,16 +27,16 @@ class ApiService {
      * @result any
      * @throws ApiError
      */
-    static getApiServiceRcmsApi1Slack(requestParam) {
+    static getApiServiceRcmsApi1Apis(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
                     method: 'get',
-                    path: `/rcms-api/1/slack`,
+                    path: `/rcms-api/1/apis`,
                     query: {
                         '_output_format': requestParam.outputFormat,
                         '_lang': requestParam.lang,
@@ -49,9 +46,47 @@ class ApiService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
+            return result.body;
+        });
+    }
+    /**
+     *
+     * ### **Api::openapi_data (v1)**
+     *
+     *
+     * @param apiId API ID
+     * @param outputFormat Format (json|xml|csv)
+     * @param lang Language
+     * @param charset Charset
+     * @result any
+     * @throws ApiError
+     */
+    static getApiServiceRcmsApi1Openapi(requestParam) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const shouldHookToken = Object.keys({
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
+            }).length > 0;
+            const request = () => __awaiter(this, void 0, void 0, function* () {
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
+                    method: 'get',
+                    path: `/rcms-api/1/openapi`,
+                    query: {
+                        'api_id': requestParam.apiId,
+                        '_output_format': requestParam.outputFormat,
+                        '_lang': requestParam.lang,
+                        '_charset': requestParam.charset,
+                    },
+                });
+            });
+            let result = yield request();
+            if (shouldHookToken && !result.ok && result.status === 401) {
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
+            }
+            catchGenericError(result);
             return result.body;
         });
     }
@@ -66,16 +101,16 @@ class ApiService {
      * @result any
      * @throws ApiError
      */
-    static getApiServiceRcmsApi1Test2(requestParam) {
+    static getApiServiceRcmsApi1Request(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
                     method: 'get',
-                    path: `/rcms-api/1/test2`,
+                    path: `/rcms-api/1/request`,
                     query: {
                         '_output_format': requestParam.outputFormat,
                         '_lang': requestParam.lang,
@@ -85,52 +120,15 @@ class ApiService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
-            return result.body;
-        });
-    }
-    /**
-     *
-     * ### **Api::request_api (v1)**
-     *
-     *
-     * @param outputFormat Format (json|xml|csv)
-     * @param lang Language
-     * @param charset Charset
-     * @result any
-     * @throws ApiError
-     */
-    static getApiServiceRcmsApi1Sendmail(requestParam) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
-            }).length > 0;
-            const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
-                    method: 'get',
-                    path: `/rcms-api/1/sendmail`,
-                    query: {
-                        '_output_format': requestParam.outputFormat,
-                        '_lang': requestParam.lang,
-                        '_charset': requestParam.charset,
-                    },
-                });
-            });
-            let result = yield request();
-            if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
-            }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
             return result.body;
         });
     }
 }
-exports.ApiService = ApiService;
 (function (ApiService) {
     ;
     ;
     ;
-})(ApiService = exports.ApiService || (exports.ApiService = {}));
+})(ApiService || (ApiService = {}));

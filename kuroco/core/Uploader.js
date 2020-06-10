@@ -1,27 +1,7 @@
-"use strict";
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 /* prettier-ignore */
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -31,27 +11,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.UploaderFactory = void 0;
-const firebase = __importStar(require("firebase"));
-const AuthenticationService_1 = require("../services/AuthenticationService");
+import * as firebase from 'firebase';
+import { AuthenticationService } from '../services/AuthenticationService';
 const firebaseConfig = {
-    'apiKey': 'AIzaSyAcIlLYHomXJsTe6A2_T_YpBV1T8UdeuTg',
-    'authDomain': 'picol-c8553.firebaseapp.com',
-    'databaseURL': 'https://picol-c8553.firebaseio.com',
-    'projectId': 'picol-c8553',
-    'storageBucket': 'picol-c8553.appspot.com',
-    'messagingSenderId': '700928827304',
-    'appId': '1:700928827304:web:0bf7ab839e771174bc479d',
+    'apiKey': 'AIzaSyAoOPeU11WN8_LjVI1DS1MI4Aa2kZUY_Jg',
+    'authDomain': 'kuroco-dev.firebaseapp.com',
+    'databaseURL': 'https://kuroco-dev.firebaseio.com',
+    'projectId': 'kuroco-dev',
+    'storageBucket': 'kuroco-dev.appspot.com',
+    'messagingSenderId': '234171414483',
+    'appId': '1:234171414483:web:71ae2d6c90c27e3963e126',
+    'measurementId': 'G-KLPKJ07DD9',
 };
 /**
  * Create Uploader.
  */
-class UploaderFactory {
+export class UploaderFactory {
     static create(params) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!this.storage) {
-                const { token } = yield AuthenticationService_1.AuthenticationService.postAuthenticationServiceRcmsApi1FirebaseToken(params);
+                const { token } = yield AuthenticationService.postAuthenticationServiceRcmsApi1FirebaseToken(params);
                 const app = firebase.initializeApp(firebaseConfig);
                 yield app.auth().signInWithCustomToken(token);
                 this.storage = firebase.storage();
@@ -60,7 +39,6 @@ class UploaderFactory {
         });
     }
 }
-exports.UploaderFactory = UploaderFactory;
 /**
  * Uploader using firebase storage.
  */

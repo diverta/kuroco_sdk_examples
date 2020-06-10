@@ -1,4 +1,3 @@
-"use strict";
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -12,13 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.FilesService = void 0;
-const ApiError_1 = require("../core/ApiError");
-const request_1 = require("../core/request");
-const OpenAPI_1 = require("../core/OpenAPI");
-const Auth_1 = require("../core/Auth");
-class FilesService {
+import { catchGenericError } from '../core/ApiError';
+import { request as __request } from '../core/request';
+import { OpenAPI } from '../core/OpenAPI';
+import { LocalStorage } from '../core/LocalStorage';
+export class FilesService {
     /**
      *
      * ### **Files::upload (v1)**
@@ -31,16 +28,16 @@ class FilesService {
      * @result any
      * @throws ApiError
      */
-    static postFilesServiceRcmsApi1FileUpload(requestParam) {
+    static postFilesServiceRcmsApi1FilesUpload(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
-                    path: `/rcms-api/1/file/upload`,
+                    path: `/rcms-api/1/files/upload`,
                     query: {
                         '_output_format': requestParam.outputFormat,
                         '_lang': requestParam.lang,
@@ -51,14 +48,13 @@ class FilesService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
             return result.body;
         });
     }
 }
-exports.FilesService = FilesService;
 (function (FilesService) {
     ;
-})(FilesService = exports.FilesService || (exports.FilesService = {}));
+})(FilesService || (FilesService = {}));

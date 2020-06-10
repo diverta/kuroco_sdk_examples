@@ -1,4 +1,3 @@
-"use strict";
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -12,13 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthenticationService = void 0;
-const ApiError_1 = require("../core/ApiError");
-const request_1 = require("../core/request");
-const OpenAPI_1 = require("../core/OpenAPI");
-const Auth_1 = require("../core/Auth");
-class AuthenticationService {
+import { catchGenericError } from '../core/ApiError';
+import { request as __request } from '../core/request';
+import { OpenAPI } from '../core/OpenAPI';
+import { LocalStorage } from '../core/LocalStorage';
+export class AuthenticationService {
     /**
      *
      * ### **Login::login_challenge (v1)**
@@ -31,14 +28,14 @@ class AuthenticationService {
      * @result any
      * @throws ApiError
      */
-    static postAuthenticationServiceRcmsApi1Login(requestParam) {
+    static postAuthenticationServiceRcmsApi1AuthLogin(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({}).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
-                    path: `/rcms-api/1/login`,
+                    path: `/rcms-api/1/auth/login`,
                     query: {
                         '_output_format': requestParam.outputFormat,
                         '_lang': requestParam.lang,
@@ -49,9 +46,45 @@ class AuthenticationService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
+            return result.body;
+        });
+    }
+    /**
+     *
+     * ### **Login::logout (v1)**
+     *
+     *
+     * @param outputFormat Format (json|xml|csv)
+     * @param lang Language
+     * @param charset Charset
+     * @result any
+     * @throws ApiError
+     */
+    static postAuthenticationServiceRcmsApi1AuthLogout(requestParam) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const shouldHookToken = Object.keys({
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
+            }).length > 0;
+            const request = () => __awaiter(this, void 0, void 0, function* () {
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
+                    method: 'post',
+                    path: `/rcms-api/1/auth/logout`,
+                    query: {
+                        '_output_format': requestParam.outputFormat,
+                        '_lang': requestParam.lang,
+                        '_charset': requestParam.charset,
+                    },
+                });
+            });
+            let result = yield request();
+            if (shouldHookToken && !result.ok && result.status === 401) {
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
+            }
+            catchGenericError(result);
             return result.body;
         });
     }
@@ -71,14 +104,14 @@ class AuthenticationService {
      * @result any
      * @throws ApiError
      */
-    static postAuthenticationServiceRcmsApi1Token(requestParam) {
+    static postAuthenticationServiceRcmsApi1AuthToken(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({}).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
-                    path: `/rcms-api/1/token`,
+                    path: `/rcms-api/1/auth/token`,
                     query: {
                         '_output_format': requestParam.outputFormat,
                         '_lang': requestParam.lang,
@@ -89,45 +122,85 @@ class AuthenticationService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
             return result.body;
         });
     }
     /**
      *
-     * ### **Login::logout (v1)**
+     * ### **Login::reminder (v1)**
      *
      *
+     * @param requestBody
      * @param outputFormat Format (json|xml|csv)
      * @param lang Language
      * @param charset Charset
      * @result any
      * @throws ApiError
      */
-    static postAuthenticationServiceRcmsApi1Logout(requestParam) {
+    static postAuthenticationServiceRcmsApi1MePwReminder(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
-                    path: `/rcms-api/1/logout`,
+                    path: `/rcms-api/1/me/pw/reminder`,
                     query: {
                         '_output_format': requestParam.outputFormat,
                         '_lang': requestParam.lang,
                         '_charset': requestParam.charset,
                     },
+                    body: requestParam.requestBody,
                 });
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
+            return result.body;
+        });
+    }
+    /**
+     *
+     * ### **Login::reset_password (v1)**
+     *
+     *
+     * @param requestBody
+     * @param outputFormat Format (json|xml|csv)
+     * @param lang Language
+     * @param charset Charset
+     * @result any
+     * @throws ApiError
+     */
+    static postAuthenticationServiceRcmsApi1MePwReset(requestParam) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const shouldHookToken = Object.keys({
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
+            }).length > 0;
+            const request = () => __awaiter(this, void 0, void 0, function* () {
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
+                    method: 'post',
+                    path: `/rcms-api/1/me/pw/reset`,
+                    query: {
+                        '_output_format': requestParam.outputFormat,
+                        '_lang': requestParam.lang,
+                        '_charset': requestParam.charset,
+                    },
+                    body: requestParam.requestBody,
+                });
+            });
+            let result = yield request();
+            if (shouldHookToken && !result.ok && result.status === 401) {
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
+            }
+            catchGenericError(result);
             return result.body;
         });
     }
@@ -136,26 +209,22 @@ class AuthenticationService {
      * ### **Login::profile (v1)**
      *
      *
-     * ## Controller parameters
-     *
-     * > **basic_info** `nickname,member_photo`
-     *
      * @param outputFormat Format (json|xml|csv)
      * @param lang Language
      * @param charset Charset
      * @result any
      * @throws ApiError
      */
-    static getAuthenticationServiceRcmsApi1Profile(requestParam) {
+    static getAuthenticationServiceRcmsApi1MeProfile(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
                     method: 'get',
-                    path: `/rcms-api/1/profile`,
+                    path: `/rcms-api/1/me/profile`,
                     query: {
                         '_output_format': requestParam.outputFormat,
                         '_lang': requestParam.lang,
@@ -165,9 +234,9 @@ class AuthenticationService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
             return result.body;
         });
     }
@@ -185,11 +254,11 @@ class AuthenticationService {
     static postAuthenticationServiceRcmsApi1FirebaseToken(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
+                return yield __request({
+                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
                     path: `/rcms-api/1/firebase_token`,
                     query: {
@@ -201,50 +270,13 @@ class AuthenticationService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
+                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            ApiError_1.catchGenericError(result);
-            return result.body;
-        });
-    }
-    /**
-     *
-     * ### **Login::gcs_info (v1)**
-     *
-     *
-     * @param outputFormat Format (json|xml|csv)
-     * @param lang Language
-     * @param charset Charset
-     * @result any
-     * @throws ApiError
-     */
-    static postAuthenticationServiceRcmsApi1GcsInfo(requestParam) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
-            }).length > 0;
-            const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield request_1.request({
-                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${Auth_1.Auth.getAccessToken()}` } : {},
-                    method: 'post',
-                    path: `/rcms-api/1/gcs_info`,
-                    query: {
-                        '_output_format': requestParam.outputFormat,
-                        '_lang': requestParam.lang,
-                        '_charset': requestParam.charset,
-                    },
-                });
-            });
-            let result = yield request();
-            if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield Auth_1.Auth.retryRequest(request, result);
-            }
-            ApiError_1.catchGenericError(result);
+            catchGenericError(result);
             return result.body;
         });
     }
 }
-exports.AuthenticationService = AuthenticationService;
 (function (AuthenticationService) {
     ;
     ;
@@ -252,4 +284,5 @@ exports.AuthenticationService = AuthenticationService;
     ;
     ;
     ;
-})(AuthenticationService = exports.AuthenticationService || (exports.AuthenticationService = {}));
+    ;
+})(AuthenticationService || (AuthenticationService = {}));

@@ -1,16 +1,13 @@
-"use strict";
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 /* prettier-ignore */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getQueryString = void 0;
 /**
  * Get query string from query parameters object. This method also
  * supports multi-value items by creating a key for each item.
  * @param params Key value based object.
  */
-function getQueryString(params) {
+export function getQueryString(params) {
     const qs = [];
     for (const key in params) {
         if (typeof params[key] !== 'undefined') {
@@ -32,4 +29,3 @@ function getQueryString(params) {
     }
     return '';
 }
-exports.getQueryString = getQueryString;

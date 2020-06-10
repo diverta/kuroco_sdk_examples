@@ -2,8 +2,7 @@ const frameworks = ["angular", "react", "react-ts", "vue", "vue-ts", "jquery"];
 
 module.exports = {
   scripts: {
-    'update': `kuroco generate -o kuroco -l js`,
-
+    'update': `kuroco pull && kuroco generate -o kuroco -l js`,
     ...frameworks.reduce(
       (prev, cur) => ({
         ...prev,

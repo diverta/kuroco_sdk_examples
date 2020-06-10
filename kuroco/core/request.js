@@ -1,4 +1,3 @@
-"use strict";
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -12,24 +11,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.request = void 0;
 // @ts-ignore-start
-const OpenAPI_1 = require("./OpenAPI");
+import { OpenAPI } from './OpenAPI';
 // @ts-ignore-end
-const getFormData_1 = require("./getFormData");
-const getQueryString_1 = require("./getQueryString");
-const requestUsingFetch_1 = require("./requestUsingFetch");
+import { getFormData } from './getFormData';
+import { getQueryString } from './getQueryString';
+import { requestUsingFetch } from './requestUsingFetch';
 /**
  * Create the request.
  * @param options Request method options.
  * @returns Result object (see above)
  */
-function request(options) {
+export function request(options) {
     return __awaiter(this, void 0, void 0, function* () {
         // Escape path (RFC3986) and create the request URL
         let path = options.path.replace(/[:]/g, '_');
-        let url = `${OpenAPI_1.OpenAPI.BASE}${path}`;
+        let url = `${OpenAPI.BASE}${path}`;
         // Create request headers
         const headers = new Headers(Object.assign(Object.assign({}, options.headers), { Accept: 'application/json', 'content-type': 'application/json' }));
         // Create request settings
@@ -40,11 +37,11 @@ function request(options) {
         };
         // Add the query parameters (if defined).
         if (options.query) {
-            url += getQueryString_1.getQueryString(options.query);
+            url += getQueryString(options.query);
         }
         // Append formData as body
         if (options.formData) {
-            request.body = getFormData_1.getFormData(options.formData);
+            request.body = getFormData(options.formData);
         }
         else if (options.body) {
             // If this is blob data, then pass it directly to the body and set content type.
@@ -61,7 +58,7 @@ function request(options) {
             }
         }
         try {
-            return yield requestUsingFetch_1.requestUsingFetch(url, request, options.responseHeader);
+            return yield requestUsingFetch(url, request, options.responseHeader);
         }
         catch (error) {
             return {
@@ -74,4 +71,3 @@ function request(options) {
         }
     });
 }
-exports.request = request;

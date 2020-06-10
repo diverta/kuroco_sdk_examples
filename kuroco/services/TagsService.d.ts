@@ -4,14 +4,6 @@ export declare class TagsService {
      * ### **Tag::list (v1)**
      *
      *
-     * ## Controller parameters
-     *
-     * > **groupBy** `module_id`
-     *
-     * > **groupAs** `array`
-     *
-     * @param moduleId module_id
-     * @param moduleType Module type
      * @param outputFormat Format (json|xml|csv)
      * @param lang Language
      * @param charset Charset
@@ -19,6 +11,8 @@ export declare class TagsService {
      * @param pageId Page ID
      * @param id Tag IDs that you would like to display
      * @param categoryId ID of the tag category to be displayed. (Default: All)
+     * @param groupBy Grouping List by (module_id / category)
+     * @param groupAs Grouping List as (array or object)
      * @result any
      * @throws ApiError
      */
@@ -35,36 +29,23 @@ export declare class TagsService {
      * @result any
      * @throws ApiError
      */
-    static postTagsServiceRcmsApi1TagCreate(requestParam: TagsService.postTagsServiceRcmsApi1TagCreateRequest): Promise<any>;
+    static postTagsServiceRcmsApi1TagsInsert(requestParam: TagsService.postTagsServiceRcmsApi1TagsInsertRequest): Promise<any>;
     /**
      *
-     * ### **Tag::list (v1)**
+     * ### **Tag::delete (v1)**
      *
      *
-     * ## Controller parameters
-     *
-     * > **groupBy** `category`
-     *
-     * > **groupAs** `array`
-     *
-     * > **order** `category_weight:desc`
-     *
+     * @param tagId
      * @param outputFormat Format (json|xml|csv)
      * @param lang Language
      * @param charset Charset
-     * @param order Set the sort order. Available param {0}
-     * @param pageId Page ID
-     * @param id Tag IDs that you would like to display
-     * @param categoryId ID of the tag category to be displayed. (Default: All)
      * @result any
      * @throws ApiError
      */
-    static getTagsServiceRcmsApi1TagsCategoryGrouped(requestParam: TagsService.getTagsServiceRcmsApi1TagsCategoryGroupedRequest): Promise<any>;
+    static postTagsServiceRcmsApi1TagsDeleteTagId(requestParam: TagsService.postTagsServiceRcmsApi1TagsDeleteTagIdRequest): Promise<any>;
 }
 export declare namespace TagsService {
     interface getTagsServiceRcmsApi1TagsRequest {
-        moduleId: Array<number>;
-        moduleType: string;
         outputFormat?: string;
         lang?: string;
         charset?: string;
@@ -72,9 +53,11 @@ export declare namespace TagsService {
         pageId?: number;
         id?: Array<number>;
         categoryId?: Array<number>;
+        groupBy?: string;
+        groupAs?: string;
     }
     type getTagsServiceRcmsApi1TagsResponse = any;
-    interface postTagsServiceRcmsApi1TagCreateRequest {
+    interface postTagsServiceRcmsApi1TagsInsertRequest {
         requestBody: {
             /**
              * Title
@@ -137,15 +120,13 @@ export declare namespace TagsService {
         lang?: string;
         charset?: string;
     }
-    type postTagsServiceRcmsApi1TagCreateResponse = any;
-    interface getTagsServiceRcmsApi1TagsCategoryGroupedRequest {
+    type postTagsServiceRcmsApi1TagsInsertResponse = any;
+    interface postTagsServiceRcmsApi1TagsDeleteTagIdRequest {
+        tagId: number;
         outputFormat?: string;
         lang?: string;
         charset?: string;
-        order?: Array<string>;
-        pageId?: number;
-        id?: Array<number>;
-        categoryId?: Array<number>;
     }
-    type getTagsServiceRcmsApi1TagsCategoryGroupedResponse = any;
+    type postTagsServiceRcmsApi1TagsDeleteTagIdResponse = any;
 }
+//# sourceMappingURL=TagsService.d.ts.map

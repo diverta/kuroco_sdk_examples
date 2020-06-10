@@ -1,15 +1,16 @@
 {
-	"sdk_key": "5ca00b78027561a183880e4084e63c14",
-	"api_url": "https://picol.kuroco-mng.app/",
+	"sdk_key": "677460f7d787e5756069438878cad71f",
+	"api_url": "https://kuroco-dev-mng.r-cms.jp/",
 	"gcp": {
 		"firebaseConfig": {
-			"apiKey": "AIzaSyAcIlLYHomXJsTe6A2_T_YpBV1T8UdeuTg",
-			"authDomain": "picol-c8553.firebaseapp.com",
-			"databaseURL": "https://picol-c8553.firebaseio.com",
-			"projectId": "picol-c8553",
-			"storageBucket": "picol-c8553.appspot.com",
-			"messagingSenderId": "700928827304",
-			"appId": "1:700928827304:web:0bf7ab839e771174bc479d"
+			"apiKey": "AIzaSyAoOPeU11WN8_LjVI1DS1MI4Aa2kZUY_Jg",
+			"authDomain": "kuroco-dev.firebaseapp.com",
+			"databaseURL": "https://kuroco-dev.firebaseio.com",
+			"projectId": "kuroco-dev",
+			"storageBucket": "kuroco-dev.appspot.com",
+			"messagingSenderId": "234171414483",
+			"appId": "1:234171414483:web:71ae2d6c90c27e3963e126",
+			"measurementId": "G-KLPKJ07DD9"
 		}
 	}
 }
