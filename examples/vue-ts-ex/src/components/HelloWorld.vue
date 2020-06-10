@@ -2,9 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
-      Rendering topicsIDs from dummyAPI.
-      <br />Please run
-      <code>kuroco servedummy</code> before serve this App.
+      Rendering topicsIDs from the server.
     </p>
     <div v-for="({ topics_id }, idx) in list" :key="idx">
       <span>{{ topics_id }}</span>
@@ -14,7 +12,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { TopicsApi } from "kuroco";
+import { Auth } from "kuroco/core/Auth";
+import { TopicsService } from "kuroco/services/TopicsService";
 
 @Component
 export default class HelloWorld extends Vue {
@@ -23,15 +22,16 @@ export default class HelloWorld extends Vue {
   list: any[] = [];
 
   mounted() {
-    this.getTopicsList();
+    getTopicsList()
+      .then(res => this.list = res.list)
   }
+}
 
-  async getTopicsList() {
-    const topicsApi = new TopicsApi();
-    const responseRaw = await topicsApi.rcmsApiFeedsGet({});
-    const responseFeed = await responseRaw.value();
-    this.list.push(...responseFeed.list);
-  }
+async function getTopicsList() {
+  await Auth.login({
+    requestBody: { email: 'test', password: 'qwer1234' },
+  })
+  return await TopicsService.getTopicsServiceRcmsApi1Topics1({});
 }
 </script>
 
