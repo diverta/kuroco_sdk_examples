@@ -1,3 +1,4 @@
+"use strict";
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -11,6 +12,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.requestUsingFetch = void 0;
 /**
  * Try to parse the content for any response status code.
  * We check the "Content-Type" header to see if we need to parse the
@@ -60,7 +63,7 @@ function parseHeader(response, responseHeader) {
  * @param request The request object, containing method, headers, body, etc.
  * @param responseHeader The header we want to parse.
  */
-export function requestUsingFetch(url, request, responseHeader) {
+function requestUsingFetch(url, request, responseHeader) {
     return __awaiter(this, void 0, void 0, function* () {
         // Fetch response using fetch API.
         const response = yield fetch(url, request);
@@ -77,3 +80,4 @@ export function requestUsingFetch(url, request, responseHeader) {
         };
     });
 }
+exports.requestUsingFetch = requestUsingFetch;

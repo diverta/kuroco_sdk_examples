@@ -1,8 +1,11 @@
+"use strict";
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 /* prettier-ignore */
-export class LocalStorage {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LocalStorage = void 0;
+class LocalStorage {
     /** get */
     static getAccessToken() {
         const token = localStorage.getItem(LocalStorage.TokenKeys.accessToken);
@@ -31,10 +34,11 @@ export class LocalStorage {
         localStorage.removeItem(LocalStorage.TokenKeys.refreshToken);
     }
 }
+exports.LocalStorage = LocalStorage;
 (function (LocalStorage) {
     let TokenKeys;
     (function (TokenKeys) {
         TokenKeys["accessToken"] = "accessToken";
         TokenKeys["refreshToken"] = "refreshToken";
     })(TokenKeys = LocalStorage.TokenKeys || (LocalStorage.TokenKeys = {}));
-})(LocalStorage || (LocalStorage = {}));
+})(LocalStorage = exports.LocalStorage || (exports.LocalStorage = {}));

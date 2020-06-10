@@ -1,7 +1,27 @@
+"use strict";
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 /* prettier-ignore */
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -11,11 +31,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { catchGenericError } from '../core/ApiError';
-import { request as __request } from '../core/request';
-import { OpenAPI } from '../core/OpenAPI';
-import { LocalStorage } from '../core/LocalStorage';
-export class AuthenticationService {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthenticationService = void 0;
+const ApiError_1 = require("../core/ApiError");
+const request_1 = require("../core/request");
+const OpenAPI_1 = require("../core/OpenAPI");
+const LocalStorage_1 = require("../core/LocalStorage");
+class AuthenticationService {
     /**
      *
      * ### **Login::login_challenge (v1)**
@@ -32,8 +54,8 @@ export class AuthenticationService {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({}).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield __request({
-                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
+                return yield request_1.request({
+                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage_1.LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
                     path: `/rcms-api/1/auth/login`,
                     query: {
@@ -46,9 +68,9 @@ export class AuthenticationService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
+                result = yield Promise.resolve().then(() => __importStar(require('../core/Auth'))).then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            catchGenericError(result);
+            ApiError_1.catchGenericError(result);
             return result.body;
         });
     }
@@ -66,11 +88,11 @@ export class AuthenticationService {
     static postAuthenticationServiceRcmsApi1AuthLogout(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield __request({
-                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
+                return yield request_1.request({
+                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage_1.LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
                     path: `/rcms-api/1/auth/logout`,
                     query: {
@@ -82,9 +104,9 @@ export class AuthenticationService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
+                result = yield Promise.resolve().then(() => __importStar(require('../core/Auth'))).then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            catchGenericError(result);
+            ApiError_1.catchGenericError(result);
             return result.body;
         });
     }
@@ -108,8 +130,8 @@ export class AuthenticationService {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({}).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield __request({
-                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
+                return yield request_1.request({
+                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage_1.LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
                     path: `/rcms-api/1/auth/token`,
                     query: {
@@ -122,9 +144,9 @@ export class AuthenticationService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
+                result = yield Promise.resolve().then(() => __importStar(require('../core/Auth'))).then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            catchGenericError(result);
+            ApiError_1.catchGenericError(result);
             return result.body;
         });
     }
@@ -143,11 +165,11 @@ export class AuthenticationService {
     static postAuthenticationServiceRcmsApi1MePwReminder(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield __request({
-                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
+                return yield request_1.request({
+                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage_1.LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
                     path: `/rcms-api/1/me/pw/reminder`,
                     query: {
@@ -160,9 +182,9 @@ export class AuthenticationService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
+                result = yield Promise.resolve().then(() => __importStar(require('../core/Auth'))).then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            catchGenericError(result);
+            ApiError_1.catchGenericError(result);
             return result.body;
         });
     }
@@ -181,11 +203,11 @@ export class AuthenticationService {
     static postAuthenticationServiceRcmsApi1MePwReset(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield __request({
-                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
+                return yield request_1.request({
+                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage_1.LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
                     path: `/rcms-api/1/me/pw/reset`,
                     query: {
@@ -198,9 +220,9 @@ export class AuthenticationService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
+                result = yield Promise.resolve().then(() => __importStar(require('../core/Auth'))).then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            catchGenericError(result);
+            ApiError_1.catchGenericError(result);
             return result.body;
         });
     }
@@ -218,11 +240,11 @@ export class AuthenticationService {
     static getAuthenticationServiceRcmsApi1MeProfile(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield __request({
-                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
+                return yield request_1.request({
+                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage_1.LocalStorage.getAccessToken()}` } : {},
                     method: 'get',
                     path: `/rcms-api/1/me/profile`,
                     query: {
@@ -234,9 +256,9 @@ export class AuthenticationService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
+                result = yield Promise.resolve().then(() => __importStar(require('../core/Auth'))).then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            catchGenericError(result);
+            ApiError_1.catchGenericError(result);
             return result.body;
         });
     }
@@ -254,11 +276,11 @@ export class AuthenticationService {
     static postAuthenticationServiceRcmsApi1FirebaseToken(requestParam) {
         return __awaiter(this, void 0, void 0, function* () {
             const shouldHookToken = Object.keys({
-                'Token-Auth': OpenAPI.SECURITY['Token-Auth'],
+                'Token-Auth': OpenAPI_1.OpenAPI.SECURITY['Token-Auth'],
             }).length > 0;
             const request = () => __awaiter(this, void 0, void 0, function* () {
-                return yield __request({
-                    headers: shouldHookToken ? { [OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage.getAccessToken()}` } : {},
+                return yield request_1.request({
+                    headers: shouldHookToken ? { [OpenAPI_1.OpenAPI.SECURITY['Token-Auth'].name]: `${LocalStorage_1.LocalStorage.getAccessToken()}` } : {},
                     method: 'post',
                     path: `/rcms-api/1/firebase_token`,
                     query: {
@@ -270,13 +292,14 @@ export class AuthenticationService {
             });
             let result = yield request();
             if (shouldHookToken && !result.ok && result.status === 401) {
-                result = yield import('../core/Auth').then(({ Auth }) => Auth.retryRequest(request, result));
+                result = yield Promise.resolve().then(() => __importStar(require('../core/Auth'))).then(({ Auth }) => Auth.retryRequest(request, result));
             }
-            catchGenericError(result);
+            ApiError_1.catchGenericError(result);
             return result.body;
         });
     }
 }
+exports.AuthenticationService = AuthenticationService;
 (function (AuthenticationService) {
     ;
     ;
@@ -285,4 +308,4 @@ export class AuthenticationService {
     ;
     ;
     ;
-})(AuthenticationService || (AuthenticationService = {}));
+})(AuthenticationService = exports.AuthenticationService || (exports.AuthenticationService = {}));

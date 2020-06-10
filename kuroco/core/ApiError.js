@@ -1,9 +1,12 @@
+"use strict";
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 /* prettier-ignore */
-import { isSuccess } from './isSuccess';
-export class ApiError extends Error {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.catchGenericError = exports.ApiError = void 0;
+const isSuccess_1 = require("./isSuccess");
+class ApiError extends Error {
     constructor(result, message) {
         super(message);
         this.url = result.url;
@@ -12,6 +15,7 @@ export class ApiError extends Error {
         this.body = result.body;
     }
 }
+exports.ApiError = ApiError;
 (function (ApiError) {
     let Message;
     (function (Message) {
@@ -24,12 +28,12 @@ export class ApiError extends Error {
         Message["SERVICE_UNAVAILABLE"] = "Service Unavailable";
         Message["GENERIC_ERROR"] = "Generic Error";
     })(Message = ApiError.Message || (ApiError.Message = {}));
-})(ApiError || (ApiError = {}));
+})(ApiError = exports.ApiError || (exports.ApiError = {}));
 /**
  * Catch common errors (based on status code).
  * @param result
  */
-export function catchGenericError(result) {
+function catchGenericError(result) {
     switch (result.status) {
         case 400:
             throw new ApiError(result, ApiError.Message.BAD_REQUEST);
@@ -46,7 +50,8 @@ export function catchGenericError(result) {
         case 503:
             throw new ApiError(result, ApiError.Message.SERVICE_UNAVAILABLE);
     }
-    if (!isSuccess(result.status)) {
+    if (!isSuccess_1.isSuccess(result.status)) {
         throw new ApiError(result, ApiError.Message.GENERIC_ERROR);
     }
 }
+exports.catchGenericError = catchGenericError;

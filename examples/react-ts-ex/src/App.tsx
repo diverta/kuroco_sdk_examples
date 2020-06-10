@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { TopicsApi, useDevServer } from "kuroco";
-
-useDevServer(true);
+import { TopicsService } from 'kuroco/services/TopicsService';
+import { Auth } from 'kuroco/core/Auth';
 
 const App: React.FC = () => {
   document.title = "React+TS & Kuroco SDK!";
@@ -13,8 +12,7 @@ const App: React.FC = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Rendering topicsIDs from dummyAPI.<br></br>
-          Please run <code>kuroco servedummy</code> before serve this App.
+          Rendering topicsIDs from the server.
         </p>
         <a
           className="App-link"
@@ -22,12 +20,14 @@ const App: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
         ></a>
-        {useTopicsList().map(({ topics_id }: any, idx: number) => (
+        <div style={{ marginBottom: '40px' }}>
+        {useTopicsList().map(({ topics_id }, idx) => (
           <div key={idx}>
             <span>{`${topics_id}`}</span>
             <br></br>
           </div>
         ))}
+        </div>
       </header>
     </div>
   );
@@ -37,12 +37,15 @@ function useTopicsList() {
   const [list, setList] = useState([] as any[]);
 
   useEffect(() => {
+    async function getTopicsList() {
+      await Auth.login({
+        requestBody: { email: 'test', password: 'qwer1234' },
+      })
+      return await TopicsService.getTopicsServiceRcmsApi1Topics1({});
+    }
     async function getTopics() {
-      const topicsApi = new TopicsApi();
-      const responseRaw = await topicsApi.rcmsApiFeedsGet({});
-      const responseFeed = await responseRaw.value();
-
-      setList([...list, ...responseFeed.list]);
+      const res = await getTopicsList()
+      setList([...list, ...res.list]);
     }
 
     if (list.length === 0) {
