@@ -12,28 +12,16 @@ npm i && \
 npx nps ${framwrokName} // please specify a framework you want to check.
 ```
 
-> :warning: **NOTICE**  
-> some example needs dummyAPI which is invoked by Kuroco SDK.  
-> in the case of this, you can run one by following commands.  
-> `npm i -g @kuroco/cli --registry http://35.190.232.54 && kuroco servedummy`
+for instance,  
+`npx nps react-ts // executes Kuroco with React & TypeScript (using commonjs modules & webpack, enabled TS intellisence)`,  
+`npx nps vue // executes Kuroco with React & TypeScript (using commonjs modules & webpack)`,  
+`npx nps jquery-standalone  // executes Kuroco with jQuery (using bundled JavaScript available on browser)`
 
-## dirs
+examples excapting `jquery-standalone-ex` are installing Kuroco sources with installing local `./kuroco` directory.  
+this means that they are using the same module.
 
-```
-.
-├── README.md
-├── package.json
-├── package.json
-├── apiconfig
-├── kuroco  // auto-generated codes by SDK.
-└── examples    // frameworkds examples
-    ├── angular-ex
-    ├── jquery-ex
-    ├── react-ex
-    ├── react-ts-ex
-    ├── vue-ex
-    └── vue-ts-ex
-```
+and if you want to update generated codes, type  
+`npx nps update`
 
 ## more
 
