@@ -136,7 +136,7 @@ class MembersService {
      *
      * ## Controller parameters
      *
-     * > **default_group_id** `1`
+     * > **default_group_id** `2`
      *
      * @param requestBody
      * @param outputFormat Format (json|xml|csv)
@@ -178,7 +178,7 @@ class MembersService {
      *
      * ## Controller parameters
      *
-     * > **allowed_group_ids** `1`
+     * > **allowed_group_ids** `2`
      *
      * @param requestBody
      * @param outputFormat Format (json|xml|csv)
@@ -220,7 +220,7 @@ class MembersService {
      *
      * ## Controller parameters
      *
-     * > **allowed_group_ids** `1`
+     * > **allowed_group_ids** `2`
      *
      * @param requestBody
      * @param outputFormat Format (json|xml|csv)
@@ -264,6 +264,8 @@ class MembersService {
      *
      * > **self_only** `true`
      *
+     * > **allowed_group_ids** `2`
+     *
      * @param requestBody
      * @param outputFormat Format (json|xml|csv)
      * @param lang Language
@@ -305,6 +307,8 @@ class MembersService {
      * ## Controller parameters
      *
      * > **self_only** `true`
+     *
+     * > **allowed_group_ids** `2`
      *
      * @param requestBody
      * @param outputFormat Format (json|xml|csv)

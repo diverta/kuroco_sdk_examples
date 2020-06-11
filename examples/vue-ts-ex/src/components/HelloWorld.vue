@@ -12,8 +12,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Auth } from "kuroco/core/Auth";
-import { TopicsService } from "kuroco/services/TopicsService";
+import { Auth, TopicsService } from "kuroco";
 
 @Component
 export default class HelloWorld extends Vue {
