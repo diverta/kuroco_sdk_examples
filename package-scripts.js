@@ -1,4 +1,4 @@
-const frameworks = ["angular", "react", "react-ts", "vue", "vue-ts", "jquery"];
+const frameworks = ["angular", "react", "react-ts", "vue", "vue-ts", "jquery", "jquery-standalone"];
 
 module.exports = {
   scripts: {
