@@ -1,4 +1,15 @@
+const path = require('path');
+
 const frameworks = ["angular", "react", "react-ts", "vue", "vue-ts", "jquery", "jquery-standalone"];
+
+function getUpdateAllScript(frameworks) {
+  const updater = path.resolve('./node_modules/npm-check-updates/bin/npm-check-updates.js');
+  const targets = [
+    path.resolve(__dirname),
+    ...frameworks.map(fn => path.resolve(`./examples/${fn}-ex`))
+  ];
+  return targets.map(tgt => `cd ${tgt} && node ${updater} -u`).join(' && ');
+}
 
 module.exports = {
   scripts: {
@@ -11,6 +22,7 @@ module.exports = {
         )
       }),
       {}
-    )
+    ),
+    'updateAllDependencies': getUpdateAllScript(frameworks),
   }
 };
