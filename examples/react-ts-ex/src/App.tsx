@@ -45,7 +45,7 @@ function useTopicsList() {
     }
     async function getTopics() {
       const res = await getTopicsList()
-      setList([...list, ...res.list]);
+      setList([...list, ...res.body.list]);
     }
 
     if (list.length === 0) {

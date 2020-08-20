@@ -17,8 +17,8 @@ for instance,
 `npx nps vue // executes Kuroco with React & TypeScript (using commonjs modules & webpack)`,  
 `npx nps jquery-standalone  // executes Kuroco with jQuery (using bundled JavaScript available on browser)`
 
-all examples excapting `jquery-standalone-ex` are installing Kuroco sources with installing local `./kuroco` directory,  
-so they are using the same module.
+all examples besides `jquery-standalone-ex` will install Kuroco sources with local `./kuroco` directory,  
+they are using the same module.
 
 and if you want to update generated codes, type  
 `npx nps update`

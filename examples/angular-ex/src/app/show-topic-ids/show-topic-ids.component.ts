@@ -14,7 +14,7 @@ export class ShowTopicIDsComponent implements OnInit {
 
   ngOnInit() {
     this.getTopicsList()
-      .then(res => this.list = res.list);
+      .then(res => this.list = res.body.list);
   }
 
   async getTopicsList() {

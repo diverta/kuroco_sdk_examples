@@ -5,7 +5,7 @@ import { Auth } from 'kuroco/core/Auth';
 $(() => {
   getTopicsList()
     .then(res => {
-      const topicsIDsMsg = res.list.map(({ topics_id }) => topics_id).join("\n");
+      const topicsIDsMsg = res.body.list.map(({ topics_id }) => topics_id).join("\n");
       renderMsg(topicsIDsMsg);
     })
     .catch(err => {

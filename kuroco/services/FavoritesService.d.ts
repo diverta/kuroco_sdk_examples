@@ -1,3 +1,4 @@
+import { Result } from '../core/Result';
 export declare class FavoritesService {
     /**
      *
@@ -21,7 +22,7 @@ export declare class FavoritesService {
      * @result any
      * @throws ApiError
      */
-    static getFavoritesServiceRcmsApi1Favorites(requestParam: FavoritesService.getFavoritesServiceRcmsApi1FavoritesRequest): Promise<any>;
+    static getFavoritesServiceRcmsApi1Favorites(requestParam: FavoritesService.getFavoritesServiceRcmsApi1FavoritesRequest): Promise<Result<any>>;
     /**
      *
      * ### **Favorite::insert (v1)**
@@ -34,7 +35,7 @@ export declare class FavoritesService {
      * @result any
      * @throws ApiError
      */
-    static postFavoritesServiceRcmsApi1FavoritesInsert(requestParam: FavoritesService.postFavoritesServiceRcmsApi1FavoritesInsertRequest): Promise<any>;
+    static postFavoritesServiceRcmsApi1FavoritesInsert(requestParam: FavoritesService.postFavoritesServiceRcmsApi1FavoritesInsertRequest): Promise<Result<any>>;
     /**
      *
      * ### **Favorite::delete (v1)**
@@ -47,7 +48,7 @@ export declare class FavoritesService {
      * @result any
      * @throws ApiError
      */
-    static postFavoritesServiceRcmsApi1FavoritesDelete(requestParam: FavoritesService.postFavoritesServiceRcmsApi1FavoritesDeleteRequest): Promise<any>;
+    static postFavoritesServiceRcmsApi1FavoritesDelete(requestParam: FavoritesService.postFavoritesServiceRcmsApi1FavoritesDeleteRequest): Promise<Result<any>>;
 }
 export declare namespace FavoritesService {
     interface getFavoritesServiceRcmsApi1FavoritesRequest {

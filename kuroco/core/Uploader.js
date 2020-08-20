@@ -31,20 +31,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UploaderFactory = void 0;
-const firebase = __importStar(require("firebase"));
+const firebase = __importStar(require("firebase/app"));
+require("firebase/auth");
+require("firebase/storage");
+const FirebaseUtil_1 = __importDefault(require("./FirebaseUtil"));
 const AuthenticationService_1 = require("../services/AuthenticationService");
-const firebaseConfig = {
-    'apiKey': 'AIzaSyAoOPeU11WN8_LjVI1DS1MI4Aa2kZUY_Jg',
-    'authDomain': 'kuroco-dev.firebaseapp.com',
-    'databaseURL': 'https://kuroco-dev.firebaseio.com',
-    'projectId': 'kuroco-dev',
-    'storageBucket': 'kuroco-dev.appspot.com',
-    'messagingSenderId': '234171414483',
-    'appId': '1:234171414483:web:71ae2d6c90c27e3963e126',
-    'measurementId': 'G-KLPKJ07DD9',
-};
 /**
  * Create Uploader.
  */
@@ -52,9 +48,8 @@ class UploaderFactory {
     static create(params) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!this.storage) {
-                const { token } = yield AuthenticationService_1.AuthenticationService.postAuthenticationServiceRcmsApi1FirebaseToken(params);
-                const app = firebase.initializeApp(firebaseConfig);
-                yield app.auth().signInWithCustomToken(token);
+                const { token } = (yield AuthenticationService_1.AuthenticationService.postAuthenticationServiceRcmsApi1FirebaseToken(params)).body;
+                yield FirebaseUtil_1.default.auth().signInWithCustomToken(token);
                 this.storage = firebase.storage();
             }
             return new FirebaseStorageUploader(this.storage);

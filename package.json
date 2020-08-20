@@ -7,11 +7,13 @@
   "author": "",
   "license": "none",
   "devDependencies": {
+    "kuroco-sdk": "^0.1.25",
     "npmrc": "^1.1.1",
     "nps": "^5.9.12",
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
+    "@vimeo/player": "^2.12.2",
     "firebase": "^7.15.0"
   }
 }
