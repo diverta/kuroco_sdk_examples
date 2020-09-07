@@ -8,13 +8,13 @@
   "license": "none",
   "devDependencies": {
     "kuroco-sdk": "^0.1.25",
-    "npm-check-updates": "^7.1.1",
+    "npm-check-updates": "^8.1.0",
     "npmrc": "^1.1.1",
     "nps": "^5.10.0",
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "@vimeo/player": "^2.12.2",
-    "firebase": "^7.18.0"
+    "@vimeo/player": "^2.13.0",
+    "firebase": "^7.19.1"
   }
 }
