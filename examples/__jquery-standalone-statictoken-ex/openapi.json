@@ -1,0 +1,84 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Static Token",
+		"version": "1",
+		"description": "test3"
+	},
+	"servers": [
+		{
+			"url": "https://kuroco-dev.a.kuroco.app",
+			"description": "API Backend"
+		}
+	],
+	"paths": {
+		"/rcms-api/3/test": {
+			"summary": "rcms_api:1:Api:list",
+			"description": "Operations Desc",
+			"get": {
+				"tags": [
+					"API"
+				],
+				"summary": "",
+				"description": "\n### **Api::list (v1)**\n\nfor testing security",
+				"parameters": [
+					{
+						"name": "_output_format",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Format (json|xml|csv)"
+					},
+					{
+						"name": "_lang",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Language"
+					},
+					{
+						"name": "_charset",
+						"schema": {
+							"type": "string",
+							"format": ""
+						},
+						"in": "query",
+						"required": false,
+						"style": "form",
+						"explode": true,
+						"description": "Charset"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": ""
+					}
+				},
+				"security": [
+					{
+						"Token-Auth": []
+					}
+				]
+			}
+		}
+	},
+	"components": {
+		"securitySchemes": {
+			"Token-Auth": {
+				"type": "apiKey",
+				"in": "header",
+				"name": "X-RCMS-API-ACCESS-TOKEN"
+			}
+		}
+	}
+}

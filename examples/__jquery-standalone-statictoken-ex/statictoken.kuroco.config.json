@@ -1,0 +1,7 @@
+{
+    "sdk_key":"13a3b473ffac58809d370560fc8a5396",
+    "api_url":"https://kuroco-dev.a.kuroco.app",
+    "management_url":"https://kuroco-dev-mng.r-cms.jp",
+    "gcp": {
+        "firebaseConfig": {"apiKey":"AIzaSyAoOPeU11WN8_LjVI1DS1MI4Aa2kZUY_Jg","authDomain":"kuroco-dev.firebaseapp.com","databaseURL":"https://kuroco-dev.firebaseio.com","projectId":"kuroco-dev","storageBucket":"kuroco-dev.appspot.com","messagingSenderId":"234171414483","appId":"1:234171414483:web:71ae2d6c90c27e3963e126","measurementId":"G-KLPKJ07DD9"}},"api_config":{"security":"static_token"}
+}

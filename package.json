@@ -7,7 +7,7 @@
   "author": "",
   "license": "none",
   "devDependencies": {
-    "kuroco-sdk": "^0.1.25",
+    "kuroco-sdk": "^0.1.28",
     "node-fetch": "^2.6.1",
     "npm-check-updates": "^9.0.1",
     "npmrc": "^1.1.1",
